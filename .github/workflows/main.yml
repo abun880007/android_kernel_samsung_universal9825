@@ -1,4 +1,4 @@
-name: Build 420rom OneUI 2.5 Release Kernel
+name: Build 420rom OneUI 3.0 Canary Kernel
 
 on: [push]
 
@@ -20,11 +20,12 @@ jobs:
       run: |
         set -e -o pipefail
         ./cruelbuild config                        \
+                    os_version=11.0.0              \
                     os_patch_level=2020-12         \
                     model=${{ matrix.model }}      \
-                    name=420rom-DTK8-v10.12.1-Rel  \
+                    name=420rom-ETLL-v11.1.1-Can   \
                     toolchain=$TOOLCHAIN           \
-                    +magisk                        \
+                    +magisk=canary                 \
                     +nohardening                   \
                     +nodebug                       \
                     +noatime                       \
@@ -93,7 +94,7 @@ jobs:
       if: env.INSTALLER == 'yes'
       uses: actions/upload-artifact@v2
       with:
-        name: 420rom-DTK8-v10.12.1-${{ matrix.model }}-Release-Kernel
+        name: 420rom-ETLL-v11.1.1-${{ matrix.model }}-Canary-Kernel
         path: installer/*
         if-no-files-found: error
     - name: Upload Kernel Images
@@ -106,6 +107,6 @@ jobs:
     - name: Upload Kernel Info
       uses: actions/upload-artifact@v2
       with:
-        name: ConfigurationInfo-420rom-DTK8-v10.12.1-${{ matrix.model }}-Release-Kernel
+        name: ConfigurationInfo-420rom-ETLL-v11.1.1-${{ matrix.model }}-Canary-Kernel
         path: config.*
         if-no-files-found: error
