@@ -7,7 +7,6 @@
 
 FLAG=0
 
-<<<<<<< HEAD
 $(info kperfmon_DUMMY="$(shell cp -f $(srctree)/../../frameworks/base/proto/src/olog.proto  $(srctree)/drivers/kperfmon/)")
 $(info kperfmon_DUMMY="$(shell cp -f $(srctree)/../../vendor/samsung/system/libperflog/aprotoc  $(srctree)/drivers/kperfmon/)")
 $(info kperfmon_DUMMY="$(shell chmod 777 $(srctree)/drivers/kperfmon/aprotoc)")
@@ -19,7 +18,6 @@ $(info kperfmon_DUMMY="$(shell cp -f $(srctree)/drivers/kperfmon/olog.pb.h  $(sr
 ifeq ($(CONFIG_KPERFMON), y)
 FLAG=1
 endif
->>>>>>> Cruel/cruel-DTJA-v3.10
 
 ifeq ($(FLAG), 1)
 ifneq ($(shell [ -e $(srctree)/include/linux/olog.pb.h ] && echo exist), exist)
