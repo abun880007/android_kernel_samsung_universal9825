@@ -175,12 +175,37 @@ queueing:
 
 		memcpy(skb_network_header(skb2), skb_network_header(skb), len);
 
+<<<<<<< HEAD
 		iphdr = (struct iphdr *)(skb_network_header(skb2));
 		if (iphdr->version == 4) {
 			iphdr->ttl = (u8)skb->dropid;
 		} else if (iphdr->version == 6) {
 			ip6hdr = (struct ipv6hdr *)iphdr;
 			ip6hdr->hop_limit = (u8)skb->dropid;
+=======
+		if ((skb2->dropmask & PACKET_IN)
+		    && (skb2->data > skb_network_header(skb2))) {
+			if (skb_headroom(skb2) == skb2->transport_header) {
+				push_len = (uintptr_t)skb_network_header_len(skb2);
+			} else if (skb_headroom(skb2) > skb2->transport_header) {
+				struct tcphdr *tcph = tcp_hdr(skb2);
+				push_len = (ptrdiff_t)skb_network_header_len(skb2) 
+					   + (ptrdiff_t)(tcph->doff * 4);
+			} else {
+				push_len = (ptrdiff_t)skb2->data 
+					   - (ptrdiff_t)skb_network_header(skb2);
+			}
+
+			if (unlikely(skb_headroom(skb2) < push_len)) {
+				pr_drop("odd skb: %p len:%d head:%p data:%p "
+ 					"tail:%#lx end:%#lx dev:%s\n",
+ 					 skb2, skb2->len, skb2->head, skb2->data,
+ 					 (unsigned long)skb2->tail, (unsigned long)skb2->end,
+ 					 skb2->dev ? skb2->dev->name : "<NULL>");
+				goto error_exit;
+			}
+			skb_push(skb2, push_len);
+>>>>>>> Cruel/cruel-DTJA-v3.10
 		}
 
 		pt_prev = ptype;

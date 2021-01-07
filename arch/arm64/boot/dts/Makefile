@@ -1,20 +1,53 @@
 # SPDX-License-Identifier: GPL-2.0
-dtbo-y += samsung/exynos9820-d2x_eur_open_17.dtbo
-dtbo-y += samsung/exynos9820-d2x_eur_open_18.dtbo
-dtbo-y += samsung/exynos9820-d2x_eur_open_23.dtbo
-dtbo-y += samsung/exynos9820-d2x_eur_open_16.dtbo
-dtbo-y += samsung/exynos9820-d2x_eur_open_22.dtbo
-dtbo-y += samsung/exynos9820-d2x_eur_open_24.dtbo
-dtbo-y += samsung/exynos9820-d2x_eur_open_02.dtbo
-dtbo-y += samsung/exynos9820-d2x_eur_open_20.dtbo
-dtbo-y += samsung/exynos9820-d2x_eur_open_21.dtbo
-dtbo-y += samsung/exynos9820-d2x_eur_open_19.dtbo
-dtb-y += exynos/exynos9825.dtb
 
-targets += dtbs
-DTB_LIST  := $(dtb-y) $(dtbo-y)
-always    := $(DTB_LIST)
+ifdef CONFIG_MODEL_G970F
+include arch/arm64/boot/dts/G970F.mk
+endif
 
-dtbs: $(addprefix $(obj)/, $(DTB_LIST))
+ifdef CONFIG_MODEL_G970N
+include arch/arm64/boot/dts/G970N.mk
+endif
 
-clean-files := *.dtb*
+ifdef CONFIG_MODEL_G973F
+include arch/arm64/boot/dts/G973F.mk
+endif
+
+ifdef CONFIG_MODEL_G973N
+include arch/arm64/boot/dts/G973N.mk
+endif
+
+ifdef CONFIG_MODEL_G975F
+include arch/arm64/boot/dts/G975F.mk
+endif
+
+ifdef CONFIG_MODEL_G975N
+include arch/arm64/boot/dts/G975N.mk
+endif
+
+ifdef CONFIG_MODEL_G977B
+include arch/arm64/boot/dts/G977B.mk
+endif
+
+ifdef CONFIG_MODEL_G977N
+include arch/arm64/boot/dts/G977N.mk
+endif
+
+ifdef CONFIG_MODEL_N970F
+include arch/arm64/boot/dts/N970F.mk
+endif
+
+ifdef CONFIG_MODEL_N971N
+include arch/arm64/boot/dts/N971N.mk
+endif
+
+ifdef CONFIG_MODEL_N975F
+include arch/arm64/boot/dts/N975F.mk
+endif
+
+ifdef CONFIG_MODEL_N976B
+include arch/arm64/boot/dts/N976B.mk
+endif
+
+ifdef CONFIG_MODEL_N976N
+include arch/arm64/boot/dts/N976N.mk
+endif
