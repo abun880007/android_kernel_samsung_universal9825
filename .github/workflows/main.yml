@@ -66,7 +66,7 @@ jobs:
       run: sudo apt-get install -y -qq llvm lld clang
     - name: Deploy Toolchain
       if: env.TOOLCHAIN != 'system-gcc' && env.TOOLCHAIN != 'system-clang'
-      run: git clone --depth 1 -j $(nproc) --branch $TOOLCHAIN --single-branch https://github.com/CruelKernel/samsung-exynos9820-toolchain toolchain
+      run: git clone --depth 1 -j $(nproc) --branch $TOOLCHAIN --single-branch https://github.com/420rom/samsung-exynos9820-toolchain toolchain
     - name: Kernel Build
       run: ./cruelbuild :build
     - name: Install mkbootimg
